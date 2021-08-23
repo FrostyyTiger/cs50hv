@@ -1,0 +1,47 @@
+
+
+
+//vote
+bool vote(int voter, int rank, string name)
+{
+    //cycle through voters
+    for (voter = 0; voter < voter_count; voter++)
+    {
+        //cycle through preference count
+        for (rank = 0; rank < candidate_count; rank++)
+        {
+            //iterate through array
+            for (int k = 0; k < candidate_count; k++)
+            {
+                if (strcasecmp(name, candidates[k].name) == 0)
+                {
+                   preferences[voter][rank] = k;
+                   return true;
+                }
+
+            }
+
+        }
+
+    }
+    return false;
+}
+
+//count the votes of each candidate
+void tabulate(void)
+{
+    //Cycle every voter
+    for (int i = 0; i < voter_count; i++)
+    {
+        //Check first preference, if candidate eliminated check next
+        for (int k = 0; k < candidate_count; k++)
+        {
+            if (!candidates[k].eliminated)
+            {
+               candidates[k].votes++;
+               return;
+            }
+        }
+    }
+    return;
+}
